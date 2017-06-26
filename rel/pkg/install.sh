@@ -38,11 +38,10 @@ case $2 in
         echo Trying to guess configuration ...
         IP=`ifconfig net0 | grep inet | $AWK '{print $2}'`
         CONFFILE=/data/dalmatinerdb/etc/dalmatinerdb.conf
-        cp /opt/local/dalmatinerdb/etc/dalmatinerdb.conf.example ${CONFFILE}.example
         if [ ! -f "${CONFFILE}" ]
         then
             echo "Creating new configuration from example file."
-            cp ${CONFFILE}.example ${CONFFILE}
+            cp /opt/local/dalmatinerdb/etc/dalmatinerdb.conf.example ${CONFFILE}
             $SED -i bak -e "s/127.0.0.1/${IP}/g" ${CONFFILE}
         else
             echo "Please make sure you update your config according to the update manual!"
